@@ -1,0 +1,24 @@
+'##################################
+'##  LIVE CAMERA                 ##
+'##         2020/05/05  DiNOV    ##
+'## Ref:ALL ABOUT Pi STARTER     ##
+'##      by DenpaShinbun-sha     ##
+'##        ISBN978-4-86406-034-9 ## 
+'##################################
+ACLS
+PATH$ = "/boot/SMILEBOOM/SMILEBASIC-R/workspace"
+TMPFILE$="/IMAGE.PNG"
+W=320
+H=W*3/4
+WHILE INKEY$()==""
+ CMD$="sudo fswebcam --png 5 --no-banner "
+ CMD$=CMD$+PATH$+TMPFILE$
+ RET$=SYSTEM$(CMD$)
+ IF INSTR(RET$, "failed")>=0 THEN
+  PRINT RET$
+  END
+ ENDIF
+ CLS
+ LOCATE 0,20
+ LOAD "GRP0:"+TMPFILE$
+WEND
